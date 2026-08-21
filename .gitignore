@@ -1,0 +1,6 @@
+.buildozer/
+bin/
+*.pyc
+__pycache__/
+config.json
+.env
