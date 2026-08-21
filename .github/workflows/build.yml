@@ -20,6 +20,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y git zip unzip openjdk-17-jdk
+          sudo apt-get install -y autoconf automake libtool libtool-bin
 
       - name: Install buildozer
         run: pip install buildozer cython
