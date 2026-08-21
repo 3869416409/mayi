@@ -11,27 +11,15 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - name: Build with Buildozer
+        uses: kivy/buildozer-action@v1
         with:
-          python-version: "3.11"
-
-      - name: Install system deps
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y git zip unzip openjdk-17-jdk
-          sudo apt-get install -y autoconf automake libtool libtool-bin
-          # 确保 libtool 的 m4 宏对 autoreconf 可见
-          sudo aclocal --system-acdir=/usr/share/aclocal || true
-
-      - name: Install buildozer
-        run: pip install buildozer==1.5.0 cython==0.29.33
-
-      - name: Build APK
-        run: buildozer android debug
+          android_api_level: 34
+          buildozer_version: 1.6.0
+          python_version: "3.11"
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: mayi-apk
-          path: bin/*.apk
+          path: ./bin/*.apk

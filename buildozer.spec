@@ -20,6 +20,7 @@ version = 1.0
 
 # (list) Application requirements
 # 自动识别用 requests；plyer 用于安卓选图
+# 注意：不要写具体 kivy 版本，让 buildozer 选兼容版本（写版本会去拉不存在的 wheel）
 requirements = python3,kivy,requests,plyer
 
 # (str) Supported orientation (one of landscape/portrait/portrait-reverse/landscape-reverse)
@@ -44,9 +45,6 @@ main.py.filename = main.py
 # (bool) Indicate if the application should be fullscreen or not
 fullscreen = 0
 
-# (str) Kivy version
-osx.kivy_version = 2.3.0
-
 [buildozer]
 
 # (int) Log level (0 ~ 3)
@@ -56,4 +54,4 @@ log_level = 2
 build_dir = ./.buildozer
 
 # (str) Target Android version (used by cloud build services)
-android.target = aab
+android.target = apk
