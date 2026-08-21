@@ -25,7 +25,7 @@ jobs:
           sudo aclocal --system-acdir=/usr/share/aclocal || true
 
       - name: Install buildozer
-        run: pip install buildozer==1.5.1 cython==0.29.33
+        run: pip install buildozer==1.5.0 cython==0.29.33
 
       - name: Build APK
         run: buildozer android debug
