@@ -24,8 +24,8 @@ jobs:
           echo "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $GITHUB_ENV
           echo "PATH=$PATH:/usr/lib/jvm/java-17-openjdk-amd64/bin" >> $GITHUB_ENV
 
-      - name: Install buildozer (1.6.0 needs cython<3.0)
-        run: pip install "buildozer==1.6.0" "cython<3.0"
+      - name: Install buildozer (latest 0.x line fixes kivy version pin)
+        run: pip install "buildozer==0.32" "cython<3.0"
 
       - name: Build APK
         run: buildozer android debug
