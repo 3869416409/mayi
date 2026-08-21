@@ -19,14 +19,13 @@ jobs:
       - name: Install system deps
         run: |
           sudo apt-get update
-          # 用系统自带 openjdk-17，不碰已失效的 openjdk-r PPA
           sudo apt-get install -y git zip unzip openjdk-17-jdk
-          sudo apt-get install -y autoconf automake libtool libtool-bin
+          sudo apt-get install -y autoconf automake libtool libtool-bin pkg-config
           echo "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $GITHUB_ENV
           echo "PATH=$PATH:/usr/lib/jvm/java-17-openjdk-amd64/bin" >> $GITHUB_ENV
 
-      - name: Install buildozer
-        run: pip install buildozer==1.5.0 cython==0.29.33
+      - name: Install buildozer (1.6.0 needs cython<3.0)
+        run: pip install "buildozer==1.6.0" "cython<3.0"
 
       - name: Build APK
         run: buildozer android debug
