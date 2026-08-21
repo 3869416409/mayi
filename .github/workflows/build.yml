@@ -11,15 +11,28 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build with Buildozer
-        uses: ArtemSBulgakov/buildozer-action@v1
+      - name: Set up Python
+        uses: actions/setup-python@v5
         with:
-          android_api_level: 34
-          buildozer_version: stable
-          python_version: "3.11"
+          python-version: "3.11"
+
+      - name: Install system deps
+        run: |
+          sudo apt-get update
+          # 用系统自带 openjdk-17，不碰已失效的 openjdk-r PPA
+          sudo apt-get install -y git zip unzip openjdk-17-jdk
+          sudo apt-get install -y autoconf automake libtool libtool-bin
+          echo "JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64" >> $GITHUB_ENV
+          echo "PATH=$PATH:/usr/lib/jvm/java-17-openjdk-amd64/bin" >> $GITHUB_ENV
+
+      - name: Install buildozer
+        run: pip install buildozer==1.5.0 cython==0.29.33
+
+      - name: Build APK
+        run: buildozer android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
         with:
           name: mayi-apk
-          path: ./bin/*.apk
+          path: bin/*.apk
